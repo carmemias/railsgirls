@@ -16,3 +16,15 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # Install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
+
+# Install nvm with node and npm
+# From https://stackoverflow.com/questions/25899912/how-to-install-nvm-in-docker
+RUN curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
+    && chmod +x ~/.nvm/nvm.sh \
+    && . ~/.nvm/nvm.sh \
+    && nvm install 18.14.0 \
+    && nvm alias default 18.14.0 \
+    && nvm use default
+
+ENV NODE_PATH ~/.nvm/v18.14.0/lib/node_modules
+ENV PATH      ~/.nvm/v18.14.0/bin:$PATH
