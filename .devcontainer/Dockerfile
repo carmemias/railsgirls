@@ -32,4 +32,4 @@ ENV PATH      ~/.nvm/v18.14.0/bin:$PATH
 
 # See troubleshooting nvm installation on Linux: https://github.com/nvm-sh/nvm
 # Restarts the shell to recognised the new nvm installation
-RUN . ~/.profile
+# RUN . ~/.profile
