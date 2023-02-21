@@ -19,25 +19,17 @@ RUN gem install bundler -v 2.4.7 --default
 
 # # Install nvm with node and npm
 # # From https://stackoverflow.com/questions/25899912/how-to-install-nvm-in-docker
-# RUN curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
-#     && chmod +x ~/.nvm/nvm.sh \
-#     && . ~/.nvm/nvm.sh \
-#     && nvm install 18.14.0 \
-#     && nvm alias default 18.14.0 \
-#     && nvm use default
-
-# ENV NODE_PATH ~/.nvm/v18.14.0/lib/node_modules
-# ENV PATH      ~/.nvm/v18.14.0/bin:$PATH
-
-# # See troubleshooting nvm installation on Linux: https://github.com/nvm-sh/nvm
-# CMD ["source", "~/.bashrc"]
-
-# From https://github.com/timbru31/docker-ruby-node/blob/master/3.1/18/Dockerfile
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -\
-  && apt-get update -qq && apt-get install -qq --no-install-recommends \
-    nodejs \
-  && apt-get upgrade -qq \
-  && apt-get clean \
-  && npm install -g yarn@1
+RUN curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
+    && chmod +x ~/.nvm/nvm.sh \
+    && . ~/.nvm/nvm.sh \
+    && nvm install 18.14.0 \
+    && nvm alias default 18.14.0 \
+    && nvm use default
 
 ENV NODE_OPTIONS "--openssl-legacy-provider"
+ENV NODE_PATH ~/.nvm/v18.14.0/lib/node_modules
+ENV PATH      ~/.nvm/v18.14.0/bin:$PATH
+
+# See troubleshooting nvm installation on Linux: https://github.com/nvm-sh/nvm
+# Restarts the shell to recognised the new nvm installation
+RUN . ~/.profile
