@@ -12,7 +12,7 @@ RUN apt-get update && apt-get purge -y imagemagick imagemagick-6-common
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # [Optional] Uncomment this line to install additional gems.
-# RUN gem install <your-gem-names-here>
+RUN gem install bundler -v 2.4.7 --default
 
 # Install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
@@ -39,3 +39,5 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -\
   && apt-get upgrade -qq \
   && apt-get clean \
   && npm install -g yarn@1
+
+ENV NODE_OPTIONS "--openssl-legacy-provider"
